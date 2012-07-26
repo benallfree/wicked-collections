@@ -74,7 +74,11 @@ class CollectionsMixin extends Mixin
   
   static function collect($objs, $proc)
   {
-    $arr = array_map($proc, $objs);
+    $arr = array();
+    foreach($objs as $k=>$v)
+    {
+      $arr[] = call_user_func($proc, $k, $v);
+    }
     return $arr;
   }
   
