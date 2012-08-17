@@ -4,6 +4,17 @@ class CollectionsMixin extends Mixin
 {
   static $__prefix = 'array';
   
+  static function compact($coll)
+  {
+    $new = array();
+    foreach($coll as $k=>&$v)
+    {
+      if(!$v) continue;
+      $new[$k] = &$v;
+    }
+    return $new;
+  }
+  
   static function gather($coll, $name)
   {
     $arr=array();
