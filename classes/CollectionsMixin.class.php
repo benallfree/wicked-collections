@@ -171,4 +171,22 @@ class CollectionsMixin extends Mixin
     usort($arr, $fn);
     return $arr;
   }  
+  
+  static function merge_bottom(&$target, $src, $name)
+  {
+  	if (is_array($src))
+  	{
+  		foreach($src as $k=>$v)
+  		{
+  			if (is_array($v))
+  			{
+  				self::merge_bottom($target[$k], $v, $name);
+  			} else {
+  				$target[$k][$name] = $v;
+  			}
+  		}
+  	} else {
+  		$target[$name] = $src;
+  	}
+  }
 }
